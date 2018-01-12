@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %} {% endblock %}</title>
+    {% include 'base/header.html' %}
+    {% block additional_styles %} {% endblock %}
+</head>
+<body class="skin-blue layout-boxed sidebar-mini">
+<div class="wrapper">
+    {% include 'base/navbar.html' %}
+    {% include 'base/menu.html' %}
+    <div class="content-wrapper">
+        <section class="content">
+            {% block content %} {% endblock %}
+        </section>
+    </div>
+    {% include 'base/footer.html' %}
+</div>
+{% block additional_scripts %} {% endblock %}
+</body>
+</html>
