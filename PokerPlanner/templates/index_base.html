@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+        <title>Home</title>
+    {% endblock %}
+    {% load staticfiles %}
+    {% block additional_styles %}
+        <link rel="stylesheet" href={% static 'css/adminlte/css/AdminLTE.min.css' %}>
+        <link rel="stylesheet" href={% static 'css/adminlte/css/alt/AdminLTE-bootstrap-social.min.css' %}>
+        <link rel="stylesheet" href={% static 'css/adminlte/css/skins/_all-skins.min.css' %}>
+    {% endblock %}
+
+    {% block additional_scripts %}
+        <script src={% static 'js/adminlte/js/app.min.js' %}></script>
+        <script src={% static 'js/adminlte/js/demo.js' %}></script>
+    {% endblock %}
+</head>
+<body>
+{% load staticfiles %}
+
+<nav class="navbar navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a href={% url 'home' %} class="navbar-brand"><b>Home</b></a>
+        </div>
+
+        <ul class="menu" role="menu">
+            {% if user.username %}
+                <li><a href={% url 'logout' %}>Log out</a></li>
+            {% else %}
+                <li><a href={% url 'login' %}>Login</a></li>
+                <li><a href={% url 'register' %}>Register</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+{% block content %}
+{% endblock %}
+</body>
+</html>

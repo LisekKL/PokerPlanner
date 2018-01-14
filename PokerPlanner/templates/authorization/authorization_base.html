@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}<title>Authorization</title>{% endblock %}
+    {% load staticfiles %}
+    {% block additional_styles %}
+        <link rel="stylesheet" href={% static 'css/adminlte/css/AdminLTE.min.css' %}>
+        <link rel="stylesheet" href={% static 'css/adminlte/css/alt/AdminLTE-bootstrap-social.min.css' %}>
+    {% endblock %}
+
+    {% block additional_scripts %}
+        <script src={% static 'js/adminlte/js/app.js' %}></script>
+    {% endblock %}
+</head>
+<body>
+    <a href={% url 'home' %}>Home</a>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

@@ -1,5 +1,9 @@
+from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils import timezone
+
 
 # Create your models here.
 
@@ -82,32 +86,14 @@ class PokerGame(models.Model):
         return self.story.__str__()
 
 
-class Person:
-    def __init__(self, first, last):
-        self.FirstName = first
-        self.LastName = last
-
-    def __str__(self):
-        return self.FirstName + " " + self.LastName
-
-
-class PokerPlayer(Person, models.Model):
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=150)
-    login = models.CharField(max_length=8)
-    password = models.CharField(max_length=20)
-    pokerGame = models.ForeignKey(PokerGame)
+class PokerPlayer(models.Model):
+    user = models.OneToOneField(User)
+    is_currently_in_game = models.BooleanField(default=False)
+    currentPokerGame = None
     chosenCard = None
 
     def __str__(self):
-        return Person.__str__(self) + "-" + self.Login
-
-    def set_name(self,first,last):
-        self.first_name = first
-        self.last_name = last
-
-    def create_login(self):
-        self.login = self.last_name[:5] + self.first_name[:3]
+        return self.user.last_name + ", " + self.user.first_name
 
     def make_choice(self, card):
         self.chosenCard = card
@@ -116,10 +102,14 @@ class PokerPlayer(Person, models.Model):
         return self.chosenCard
 
     def join_game(self, game):
+        if self.is_currently_in_game:
+            return "Player is currently in an other game! Please finish the other game first!"
         self.pokerGame = game
+        self.is_currently_in_game = True
 
     def leave_game(self):
         self.pokerGame = None
+        self.is_currently_in_game = False
         self.chosenCard = None
 
 
