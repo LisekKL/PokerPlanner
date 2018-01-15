@@ -28,10 +28,10 @@
 
         <ul class="menu" role="menu">
             {% if user.username %}
-                <li><a href={% url 'logout' %}>Log out</a></li>
+                <li><a href={% url 'Authorization:logout' %}>Log out</a></li>
             {% else %}
-                <li><a href={% url 'login' %}>Login</a></li>
-                <li><a href={% url 'register' %}>Register</a></li>
+                <li><a href={% url 'Authorization:login' %}>Login</a></li>
+                <li><a href={% url 'Authorization:register' %}>Register</a></li>
             {% endif %}
         </ul>
     </div>

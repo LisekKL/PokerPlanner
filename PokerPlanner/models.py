@@ -5,9 +5,6 @@ from django.dispatch import receiver
 from django.utils import timezone
 
 
-# Create your models here.
-
-
 class ScrumStory(models.Model):
     name = models.CharField(max_length=200, default="")
     story_points = models.IntegerField(default=0)
