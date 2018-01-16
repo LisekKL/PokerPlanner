@@ -17,7 +17,8 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^', include('PokerPlanner.urls')),
+    url(r'^', include('PokerPlanner.urls', namespace="Home")),
+    url(r'^auth/', include('authorization.urls', namespace="Authorization")),
     url(r'^admin/', admin.site.urls),
     url(r'^poker/', include('PokerPlanner.urls'))
 ]
