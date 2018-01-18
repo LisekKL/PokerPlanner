@@ -1,10 +1,50 @@
 {% extends 'index/base.html' %}
+{% load staticfiles %}
 
 {% block title %}
-<title>Scrum stories</title>
+    <title>Scrum stories</title>
+{% endblock %}
+
+{% block basic_scripts %}
+    {{ block.super }}
+    <script src="http://webapplayers.com/inspinia_admin-v2.7.1/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="http://webapplayers.com/inspinia_admin-v2.7.1/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="http://webapplayers.com/inspinia_admin-v2.7.1/js/inspinia.js"></script>
+    <script src="http://webapplayers.com/inspinia_admin-v2.7.1/js/plugins/pace/pace.min.js"></script>
+{% endblock %}
+
+{% block basic_styles %}
+    {{ block.super }}
+    <link href="http://webapplayers.com/inspinia_admin-v2.7.1/css/animate.css" rel="stylesheet">
+    <link href="http://webapplayers.com/inspinia_admin-v2.7.1/css/style.css" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
     <h2>Available scrum stories</h2>
+    <div id="wrapper">
+        <div id="page-wrapper" class="gray-bg" style="min-height: 434px;">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="wrapper wrapper-content animated fadeInUp">
+                        <ul class="notes">
+                            {% for story in stories %}
+                                <li>
+                                    <div>
+                                        <small>{{ story.author }}</small>
+                                        <h4>{{ story.name }}</h4>
+                                        <p>{{ story.description }}</p>
+                                        <a href="#"><i class="fa fa-play-circle" aria-hidden="true"></i>Go poker!</a>
+                                        <a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                    </div>
+                                </li>
+
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
 {% endblock %}

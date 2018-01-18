@@ -16,8 +16,7 @@ class Home(View):
 
 
 def stories_overview(request):
-    story_amount = ScrumStory.objects.count()
-    return render(request, 'index/story_overview.html', {'story_amount': story_amount})
+    return render(request, 'index/story_overview.html', {'stories': ScrumStory.objects.all()})
 
 
 def games_overview(request):

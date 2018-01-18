@@ -6,26 +6,37 @@ from django.utils import timezone
 
 
 class ScrumStory(models.Model):
-    name = models.CharField(max_length=200, default="")
-    story_points = models.IntegerField(default=0)
-    dateCreated = models.DateTimeField()
+    name = models.CharField(max_length=200, default="No name")
+    description = models.TextField(default="")
+    story_points = models.IntegerField(null=True, blank=True)
+    dateCreated = models.DateTimeField(default=timezone.now)
     dateCompleted = models.DateTimeField(null=True, blank=True)
     author = models.CharField(max_length=200, default="")
-
-    def __init__(self):
-        self.name = "New SCRUM story"
-        self.dateCreated = timezone.now()
-        self.dateCompleted = None
 
     def __str__(self):
         if self.dateCompleted:
             status = "Completed"
         else:
             status = "In progress"
-        return "NAME: " + self.storyName + " DATE CREATED: " + self.dateCreated + " STATUS = " + status
+        return "NAME: " + self.name + " DATE CREATED: " + str(self.dateCreated) + " STATUS = " + status
+
+    def get_author(self):
+        return self.author
+
+    def get_name(self):
+        return self.name
+
+    def get_description(self):
+        return self.description
+
+    def get_date_created(self):
+        return str(self.dateCreated)
+
+    def get_date_completed(self):
+        return str(self.dateCompleted)
 
     def get_story_points(self):
-        return self.storyPoints
+        return self.story_points
 
     def complete(self):
         self.dateCompleted = timezone.now()
@@ -33,18 +44,10 @@ class ScrumStory(models.Model):
 
 
 class PokerTable(models.Model):
-    playerLimit = models.IntegerField()
     deck = None
 
     def set_deck(self, deck):
         self.deck = deck
-
-    def set_player_limit(self, limit):
-        self.playerLimit = limit
-
-    def add_player(self, player):
-        if 0 < len(self.PlayerList) < self.PlayerLimit:
-            self.PlayerList.append(player)
 
 
 class PokerGame(models.Model):
@@ -52,10 +55,8 @@ class PokerGame(models.Model):
     endDate = models.DateTimeField(null=True, blank=True)
     table = models.ForeignKey(PokerTable)
     story = models.ForeignKey(ScrumStory)
+    playerLimit = models.IntegerField(null=True)
     playerList = []
-
-    def __init__(self):
-        self.endDate = None
 
     def start_game(self):
         self.startDate = timezone.now()
@@ -69,8 +70,9 @@ class PokerGame(models.Model):
         return self.story.get_story_points()
 
     def add_player(self, player):
-        self.playerList.__add__(player)
-        self.save()
+        if 0 < len(self.playerList) < self.playerLimit:
+            self.playerList.append(player)
+            self.save()
 
     def remove_player(self, player):
         self.playerList.remove(player)
@@ -82,10 +84,13 @@ class PokerGame(models.Model):
     def get_story_info(self):
         return self.story.__str__()
 
+    def set_player_limit(self, limit):
+        self.playerLimit = limit
+        self.save()
+
 
 class PokerPlayer(models.Model):
     user = models.OneToOneField(User)
-    currentPokerGame = None
     chosenCard = None
 
     def __str__(self):
@@ -93,16 +98,19 @@ class PokerPlayer(models.Model):
 
     def make_choice(self, card):
         self.chosenCard = card
+        self.save()
 
     def get_choice(self):
         return self.chosenCard
 
     def join_game(self, game):
         self.pokerGame = game
+        self.save()
 
     def leave_game(self):
         self.pokerGame = None
         self.chosenCard = None
+        self.save()
 
 
 class PokerDeck(models.Model):
@@ -128,7 +136,6 @@ class PokerDeck(models.Model):
 class PokerCard(models.Model):
     story_points = models.IntegerField()
     deck = models.ForeignKey(PokerDeck)
-    style = None
 
     def __str__(self):
         return "CARD " + self.cardId + " WITH POINT VALUE: " + self.story_points
