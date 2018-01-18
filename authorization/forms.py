@@ -33,11 +33,11 @@ class RegisterForm(forms.ModelForm):
                 raise forms.ValidationError("Passwords are not the same")
         return password1
 
-    def clean_email(self):
-        data = self.cleaned_data['email']
-        if User.objects.filter(email=data).exists():
-            raise forms.ValidationError("Email is occupied")
-        return data
+    # def clean_email(self):
+    #     data = self.cleaned_data['email']
+    #     if User.objects.filter(email=data).exists():
+    #         raise forms.ValidationError("Email is occupied")
+    #     return data
 
     def clean_username(self):
         data = self.cleaned_data['username']

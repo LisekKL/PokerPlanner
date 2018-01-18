@@ -16,8 +16,8 @@ class Register(View):
         return render(request, 'authorization/register.html', {'register_form': register_form})
 
     def post(self, request):
-        error_text = "Error registering new player!"
-        register_form = RegisterForm(request.POST)
+        error_text = ""
+        register_form = RegisterForm(data=request.POST)
         if register_form.is_valid():
             try:
                 user = User.objects.create_user(username=register_form.cleaned_data['username'],
@@ -45,6 +45,7 @@ class Register(View):
             except Exception as ex:
                 error_text = ex
 
+        # register_form.errors
         return render(request, 'authorization/register.html', {'register_form': register_form, 'error_text': error_text})
 
 

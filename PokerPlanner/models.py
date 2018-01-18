@@ -85,7 +85,6 @@ class PokerGame(models.Model):
 
 class PokerPlayer(models.Model):
     user = models.OneToOneField(User)
-    is_currently_in_game = models.BooleanField(default=False)
     currentPokerGame = None
     chosenCard = None
 
@@ -99,14 +98,10 @@ class PokerPlayer(models.Model):
         return self.chosenCard
 
     def join_game(self, game):
-        if self.is_currently_in_game:
-            return "Player is currently in an other game! Please finish the other game first!"
         self.pokerGame = game
-        self.is_currently_in_game = True
 
     def leave_game(self):
         self.pokerGame = None
-        self.is_currently_in_game = False
         self.chosenCard = None
 
 
@@ -143,47 +138,3 @@ class PokerCard(models.Model):
 
     def get_points(self):
         return self.story_points
-
-
-class PokerCardStyle:
-    def __init__(self):
-        self.height = 0
-        self.width = 0
-        self.image = None
-
-    def change_image(self, image):
-        self.image = image
-
-    def change_width(self, width):
-        self.width = width
-
-    def change_height(self, height):
-        self.height = height
-
-
-class PokerTableStyle:
-    def __init__(self):
-        self.image = None
-
-    def change_image(self, image):
-        self.image = image
-
-
-class Image:
-    def __init__(self):
-        self.url = ""
-        self.width = 0
-        self.height = 0
-        self.alternativeText = ""
-
-    def set_alternative_text(self, text):
-        self.alternativeText = text
-
-    def set_width(self, width):
-        self.width = width
-
-    def set_height(self, height):
-        self.height = height
-
-    def set_url(self, url):
-        self.url = url

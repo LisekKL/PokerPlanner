@@ -1,56 +1,46 @@
-{% extends 'index/index_base.html' %}
+{% extends 'index/base.html' %}
+{% load staticfiles %}
 
 {% block content %}
-    <p>User: {{ user.first_name }} {{ user.last_name }}</p>
-    <h1>Index page</h1>
-    <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-yellow">
-            <div class="inner">
-                <h3>{{ story_amount }}</h3>
+    {% if user.is_authenticated %}
+        <div class="bg-gray-light">
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-yellow">
+                    <div class="inner">
+                        <h3>{{ game_amount|default:"0" }}</h3>
+                        <p>Active games</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-play"></i>
+                    </div>
+                    <a href="{% url 'Home:games_overview' %}" class="small-box-footer">
+                        Go to current games <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
 
-                <p>Scrum stories</p>
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3>{{ story_amount|default:"0" }}</h3>
+                        <p>Scrum stories</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-compose"></i>
+                    </div>
+                    <a href="{% url 'Home:stories_overview' %}" class="small-box-footer">
+                        Go to scrum stories <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
             </div>
-            <div class="icon">
-                <i class="ion ion-person-add"></i>
-            </div>
-            <a href="#" class="small-box-footer">
-                More info <i class="fa fa-arrow-circle-right"></i>
-            </a>
+
         </div>
-    </div>
-
-    <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-green">
-            <div class="inner">
-                <h3>{{ player_amount }}</h3>
-
-                <p>Active players</p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-person-add"></i>
-            </div>
-            <a href="#" class="small-box-footer">
-                More info <i class="fa fa-arrow-circle-right"></i>
-            </a>
+    {% else %}
+        <div class="wrapper">
+            <img src="{% static "resources/under_construction_bg.png" %}" class="img-rounded img-responsive">
         </div>
-    </div>
 
-     <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-blue">
-            <div class="inner">
-                <h3>{{ user_amount }}</h3>
-
-                <p>Total amount of users</p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-person-add"></i>
-            </div>
-            <a href="#" class="small-box-footer">
-                More info <i class="fa fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div>
+    {% endif %}
 {% endblock %}

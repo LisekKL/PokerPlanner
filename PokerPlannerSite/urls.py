@@ -13,12 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
+from django.conf.urls import url, include, static
 from django.contrib import admin
+from django.template.backends import django
+
+from PokerPlannerSite import settings
 
 urlpatterns = [
     url(r'^', include('PokerPlanner.urls', namespace="Home")),
     url(r'^auth/', include('authorization.urls', namespace="Authorization")),
     url(r'^admin/', admin.site.urls),
-    url(r'^poker/', include('PokerPlanner.urls'))
-]
+    url(r'^poker/', include('PokerPlanner.urls')),
+    # url(r'^(?P<path>.*)/resources$', django.views.static.serve)
+]  # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
