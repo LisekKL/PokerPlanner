@@ -29,7 +29,7 @@ class Register(View):
                 if user.is_authenticated():
                     if user.is_active:
                         login(request, user)
-                        return HttpResponseRedirect(reverse('Home:stories_overview'))
+                        return HttpResponseRedirect(reverse('Home:home'))
                     else:
                         return HttpResponseRedirect(reverse('Authorization:login', kwargs={'error_text': 'Account is '
                                                                                                          'inactive.'}))

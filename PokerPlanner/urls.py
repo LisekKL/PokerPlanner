@@ -6,4 +6,5 @@ urlpatterns = [
     url(r'^$', views.Home.as_view(), name='home'),
     url(r'^home/', views.stories_overview, name='stories_overview'),
     url(r'^games/', views.games_overview, name='games_overview'),
+    url(r'^story/', views.add_story, name='add_story'),
 ]

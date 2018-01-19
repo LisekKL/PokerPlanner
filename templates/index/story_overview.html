@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block title %}
-    <title>Scrum stories</title>
+    <title xmlns="http://www.w3.org/1999/html">Scrum stories</title>
 {% endblock %}
 
 {% block basic_scripts %}
@@ -21,6 +21,9 @@
 
 {% block content %}
     <h2>Available scrum stories</h2>
+    {% if user.is_superuser %}
+        <a href="{% url 'Home:add_story' %}" class="btn btn-primary btn-lg" role="button">Add story</a>
+    {% endif %}
     <div id="wrapper">
         <div id="page-wrapper" class="gray-bg" style="min-height: 434px;">
             <div class="row">
@@ -28,13 +31,15 @@
                     <div class="wrapper wrapper-content animated fadeInUp">
                         <ul class="notes">
                             {% for story in stories %}
+
                                 <li>
                                     <div>
                                         <small>{{ story.author }}</small>
                                         <h4>{{ story.name }}</h4>
                                         <p>{{ story.description }}</p>
-                                        <a href="#"><i class="fa fa-play-circle" aria-hidden="true"></i>Go poker!</a>
-                                        <a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                        {% if user.is_superuser %}
+                                            <a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                        {% endif %}
                                     </div>
                                 </li>
 

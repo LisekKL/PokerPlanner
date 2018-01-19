@@ -21,3 +21,7 @@ def stories_overview(request):
 
 def games_overview(request):
     return render(request, 'index/current_games_overview.html')
+
+
+def add_story(request):
+    return render(request, 'index/add_story.html')
