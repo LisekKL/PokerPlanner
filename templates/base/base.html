@@ -6,11 +6,11 @@
     {% include 'base/header.html' %}
     {% block additional_styles %} {% endblock %}
 </head>
-<body class="skin-blue layout-boxed sidebar-mini">
+<body class="layout-boxed sidebar-mini">
 <div class="wrapper">
     {% include 'base/navbar.html' %}
-    {% include 'base/menu.html' %}
-    <div class="content-wrapper">
+    {#    {% include 'base/menu.html' %}#}
+    <div class="content-wrapper" style="margin-left: 1px; background-color: #122b40">
         <section class="content">
             {% block content %} {% endblock %}
         </section>

@@ -5,7 +5,7 @@
     <title xmlns="http://www.w3.org/1999/html">Scrum stories</title>
 {% endblock %}
 
-{% block basic_scripts %}
+{% block additional_scripts %}
     {{ block.super }}
     <script src="http://webapplayers.com/inspinia_admin-v2.7.1/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="http://webapplayers.com/inspinia_admin-v2.7.1/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
@@ -13,7 +13,7 @@
     <script src="http://webapplayers.com/inspinia_admin-v2.7.1/js/plugins/pace/pace.min.js"></script>
 {% endblock %}
 
-{% block basic_styles %}
+{% block additional_styles %}
     {{ block.super }}
     <link href="http://webapplayers.com/inspinia_admin-v2.7.1/css/animate.css" rel="stylesheet">
     <link href="http://webapplayers.com/inspinia_admin-v2.7.1/css/style.css" rel="stylesheet">
@@ -22,33 +22,37 @@
 {% block content %}
     <h2>Available scrum stories</h2>
     {% if user.is_superuser %}
-        <a href="{% url 'Home:add_story' %}" class="btn btn-primary btn-lg" role="button">Add story</a>
+        <a href="{% url 'Home:add_story' %}" class="btn btn-primary btn-sm" role="button">Add story</a>
     {% endif %}
     <div id="wrapper">
-        <div id="page-wrapper" class="gray-bg" style="min-height: 434px;">
+        <div id="page-wrapper" style="min-height: 400px;">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="wrapper wrapper-content animated fadeInUp">
                         <ul class="notes">
-                            {% for story in stories %}
 
+                            {% for story in stories %}
                                 <li>
-                                    <div>
+                                    <div style="overflow: scroll">
                                         <small>{{ story.author }}</small>
                                         <h4>{{ story.name }}</h4>
                                         <p>{{ story.description }}</p>
                                         {% if user.is_superuser %}
-                                            <a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                            <a href="{% url 'Home:delete_story' story.id %}"
+                                               style="display: inline-block"><i class="fa fa-trash-o"
+                                                                                aria-hidden="true"></i></a>
+                                            <br>
+                                            <a href="#" style="position: initial; padding-top: 10px; color: darkred"> <i
+                                                    class="fa fa-play" aria-hidden="true"> Start poker</i></a>
                                         {% endif %}
                                     </div>
                                 </li>
-
                             {% endfor %}
+
                         </ul>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 

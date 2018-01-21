@@ -1,5 +1,59 @@
 {% extends 'index/base.html' %}
+{% load staticfiles %}
+
 
 {% block content %}
-    <h1> Adding story </h1>
+
+    <link rel="stylesheet" href="{% static 'css/custom/add_story.css' %}">
+
+    <section id="contact" style="">
+        <div class="container">
+            <div class="row">
+                <div class="about_our_company" style="margin-bottom: 20px;">
+                    <h1 style="color:#fff;">Add a new scrum story</h1>
+                    <div class="titleline-icon"></div>
+                    <p style="color:#fff;">Please keep the title short and descriptive</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <form name="sentMessage" id="contactForm" action="{% url 'Home:add_story' %}" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ story_form.storyTitle }}
+                                    {% comment %}                                    <input type="text" class="form-control" placeholder="Title" id="name"
+                                           required="" data-validation-required-message="Please enter a title for the story.">{% endcomment %}
+                                    <p class="help-block text-danger"></p>
+                                </div>
+
+                                <div class="form-group">
+                                    {{ story_form.storyPoints }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ story_form.description }}
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-lg-12 text-center d-inline-block">
+                                <div id="success"></div>
+                                <button type="submit" class="btn btn-success btn-xl get" style="margin-right: 15px;">Add
+                                    story
+                                </button>
+                                <input type="submit" class="btn btn-default btn-xl get" formnovalidate role="button"
+                                       value="Cancel" style="margin-left: 15px;">
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
 {% endblock %}

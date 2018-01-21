@@ -1,21 +1,19 @@
 {% load staticfiles %}
-<header class="main-header">
-
+<header class="main-header" style="background-color: ivory;">
     <!-- Logo -->
-    <a href={% url 'Home:home' %} class="logo">
+
+    <a class="logo" href={% url 'Home:home' %}>
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini">Home</span>
+        {#            <span class="logo-mini">Home</span>#}
         {#      <!-- logo for regular state and mobile devices -->#}
         <span class="logo-lg"><i class="fa fa-home" aria-hidden="true"></i></span>
     </a>
-
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
 
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-
 
                 {% if user.is_authenticated %}
                     <!-- Tasks Menu -->
@@ -64,9 +62,11 @@
 
                             <!-- Menu Footer-->
                             <li class="user-footer">
+                                {% comment %}             <!-- Optional: Profile edit view? -->
                                 <div class="pull-left">
                                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                                 </div>
+                                {% endcomment %}
                                 <div class="pull-right">
                                     <a href="{% url "Authorization:logout" %}" class="btn btn-default btn-flat">Sign
                                         out</a>

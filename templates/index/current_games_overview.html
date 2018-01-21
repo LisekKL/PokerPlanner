@@ -2,7 +2,59 @@
 {% load staticfiles %}
 
 {% block content %}
-    <div class="bg-black-active">
-        <img src="{% static "resources/under_construction_bg.png" %}" class="img-rounded img-responsive">
-    </div>
+    {% load staticfiles %}
+
+    <section class="bg-light" id="team">
+        <div class="container">
+            {% if active_games.count != 0 %}
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 class="section-heading text-uppercase">Current open games</h2>
+                        <h3 class="section-subheading text-muted">An overview of all games that haven't yet reached the
+                            ending time.</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for game in active_games %}
+                        <div class="col-sm-4">
+                            <div class="team-member">
+                                <img class="mx-auto rounded-circle" src="{% static 'resources/card_deck_icon.png' %}"
+                                     alt="Game">
+                                <h4>{{ game.story.name }}</h4>
+                                <p class="text-muted">{{ game.endDate }}</p>
+                                <p class="text-muted">{{ game.playerList.count }}</p>
+                                <ul class="list-inline social-buttons">
+                                    <li class="list-inline-item">
+                                        <a href="#">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="#">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="#">
+                                            <i class="fa fa-time"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <p class="large text-muted">Dashboard for managing currently active poker games</p>
+                    </div>
+                </div>
+            {% else %}
+
+                <h1>No active games currently!</h1>
+                <p>Go to scrum stories and activate poker games through the <a href="{% url 'Home:stories_overview' %}">dashboard!</a>
+                </p>
+            {% endif %}
+        </div>
+    </section>
 {% endblock %}

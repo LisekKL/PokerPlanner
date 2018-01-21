@@ -1,0 +1,34 @@
+{% load staticfiles %}
+
+<div class="col-md-8 box box-default"
+     style="padding: 20px; background-image: url('{% static 'resources/dashboard_bg.jpg' %}')">
+    <div class="box-header ui-sortable-handle" style="color: #b8c7ce" style="color: #b8c7ce">
+        <i class="ion ion-clipboard"></i>
+
+        <h3 class="box-title">Story overview</h3>
+
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
+        <ul class="todo-list ui-sortable">
+            {% for story in stories %}
+                <li>
+                    <!-- todo text -->
+                    <span class="text" style="cursor: pointer">{{ story.name }}</span>
+                    <!-- Emphasis label -->
+                    {#                                <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>#}
+                    <!-- General tools such as edit or delete-->
+                    <div class="tools">
+                        <a href="{% url 'Home:stories_overview' %}"><i class="fa fa-edit"></i></a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer clearfix no-border" style="background: transparent">
+        <a href="{% url 'Home:stories_overview' %}" class="btn btn-default pull-right" role="button"><i
+                class="fa fa-plus"></i> View all</a>
+    </div>
+</div>

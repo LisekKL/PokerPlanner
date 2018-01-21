@@ -1,46 +1,29 @@
 {% extends 'index/base.html' %}
 {% load staticfiles %}
 
+{% block additional_scripts %}
+    {{ block.super }}
+    <script src="{% static 'js/adminlte/js/pages/dashboard.js' %}"></script>
+    <script src="{% static 'plugins/creative_gh_lp/js/creative.min.js' %}"></script>
+{% endblock %}
+
 {% block content %}
-    {% if user.is_authenticated %}
-        <div class="bg-gray-light">
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-yellow">
-                    <div class="inner">
-                        <h3>{{ game_amount|default:"0" }}</h3>
-                        <p>Active games</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-play"></i>
-                    </div>
-                    <a href="{% url 'Home:games_overview' %}" class="small-box-footer">
-                        Go to current games <i class="fa fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-green">
-                    <div class="inner">
-                        <h3>{{ story_amount|default:"0" }}</h3>
-                        <p>Scrum stories</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-compose"></i>
-                    </div>
-                    <a href="{% url 'Home:stories_overview' %}" class="small-box-footer">
-                        Go to scrum stories <i class="fa fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div>
-
+    <!-- Jeżeli użytkownik jest nie zalogowany -->
+    {% if user.is_authenticated.value is False %}
+        <div class="row">
+            {% include 'index/controls/landing_page.html' %}
         </div>
     {% else %}
-        <div class="wrapper">
-            <img src="{% static "resources/under_construction_bg.png" %}" class="img-rounded img-responsive">
+        <!-- Jeżeli użytkownik jest scrum masterem to dodany jest dashboard-->
+        {% if user.is_superuser %}
+            <div class="row"
+                 style="background-image: url('{% static 'resources/dashboard_bg.jpg' %}'); padding-top: 15px">
+                {% include 'index/controls/scrum_master_dashboard.html' %}
+            </div>
+        {% endif %}
+        <!-- Jeżeli jest zwykłym użytkownikiem widzi tylko historyjki -->
+        <div class="row" style="background-image: url('{% static 'resources/dashboard_bg.jpg' %}')">
+            {% include 'index/controls/story_preview_widget.html' %}
         </div>
-
     {% endif %}
 {% endblock %}

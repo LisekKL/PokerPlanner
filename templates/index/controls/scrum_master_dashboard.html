@@ -1,0 +1,52 @@
+{% load staticfiles %}
+
+<!-- Widget historyjek - niebieski -->
+<div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-blue">
+        <div class="inner">
+            <h3>{{ story_amount|default:"0" }}</h3>
+            <p>Scrum Stories</p>
+        </div>
+        <div class="icon">
+            <i class="ion ion-play"></i>
+        </div>
+        <a href="{% url 'Home:add_story' %}" class="small-box-footer">
+            Add a new story <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+
+<!-- Widget graczy - zielony -->
+<div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-green-gradient">
+        <div class="inner">
+            <h3>{{ player_amount|default:"0" }}</h3>
+            <p>Poker Players</p>
+        </div>
+        <div class="icon">
+            <i class="ion ion-play"></i>
+        </div>
+        <a href="#" class="small-box-footer">
+            View all players <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+
+<!-- Widget gier - żółty -->
+<div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-yellow">
+        <div class="inner">
+            <h3>{{ game_amount|default:"0" }}</h3>
+            <p>Poker games</p>
+        </div>
+        <div class="icon">
+            <i class="ion ion-document-text"></i>
+        </div>
+        <a href="{% url 'Home:games_overview' %}" class="small-box-footer">
+            Go to open games <i class="fa fa-arrow-circle-right"></i>
+        </a>
+    </div>
+</div>
