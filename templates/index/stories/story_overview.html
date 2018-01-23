@@ -20,7 +20,7 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Available scrum stories</h2>
+    <h2 style="color: beige">Available scrum stories</h2>
     {% if user.is_superuser %}
         <a href="{% url 'Home:add_story' %}" class="btn btn-primary btn-sm" role="button">Add story</a>
     {% endif %}
@@ -33,14 +33,13 @@
 
                             {% for story in stories %}
                                 <li>
-                                    <div style="overflow: scroll">
+                                    <div style="overflow: auto">
                                         <small>{{ story.author }}</small>
                                         <h4>{{ story.name }}</h4>
                                         <p>{{ story.description }}</p>
                                         {% if user.is_superuser %}
-                                            <a href="{% url 'Home:delete_story' story.id %}"
-                                               style="display: inline-block"><i class="fa fa-trash-o"
-                                                                                aria-hidden="true"></i></a>
+                                            <a href="{% url 'Home:delete_story' story.id %}">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                             <br>
                                             <a href="#" style="position: initial; padding-top: 10px; color: darkred"> <i
                                                     class="fa fa-play" aria-hidden="true"> Start poker</i></a>
@@ -48,7 +47,6 @@
                                     </div>
                                 </li>
                             {% endfor %}
-
                         </ul>
                     </div>
                 </div>

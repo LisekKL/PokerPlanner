@@ -22,24 +22,23 @@ class Home(View):
 class StoriesOverview(View):
     def get(self, request):
         stories = ScrumStory.objects.all()
-        return render(request, 'index/story_overview.html', {'stories': stories})
+        return render(request, 'index/stories/story_overview.html', {'stories': stories})
 
 
 def get_story_overview(request):
     stories = ScrumStory.objects.all()
-    return render(request, 'index/story_overview.html', {'stories': stories})
+    return render(request, 'index/stories/story_overview.html', {'stories': stories})
 
 
 class AddStory(View):
     def get(self, request):
         story_form = AddStoryForm()
-        return render(request, 'index/add_story.html', {'story_form': story_form})
+        return render(request, 'index/stories/add_story.html', {'story_form': story_form})
 
     def post(self, request):
         story_form = AddStoryForm(data=request.POST)
         if story_form.is_valid():
             try:
-                author = ''
                 if request.user.is_authenticated():
                     author = request.user.first_name + ' ' + request.user.last_name
                     if author == ' ':
@@ -59,7 +58,7 @@ class AddStory(View):
 
 class GamesOverview(View):
     def get(self, request):
-        active_games = PokerGame.objects.all();
+        active_games = PokerGame.objects.all()
         return render(request, 'index/current_games_overview.html', {'active_games': active_games})
 
 

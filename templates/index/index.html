@@ -17,12 +17,12 @@
         <!-- Jeżeli użytkownik jest scrum masterem to dodany jest dashboard-->
         {% if user.is_superuser %}
             <div class="row"
-                 style="background-image: url('{% static 'resources/dashboard_bg.jpg' %}'); padding-top: 15px">
+                 style="background-color: transparent; padding-top: 15px">
                 {% include 'index/controls/scrum_master_dashboard.html' %}
             </div>
         {% endif %}
         <!-- Jeżeli jest zwykłym użytkownikiem widzi tylko historyjki -->
-        <div class="row" style="background-image: url('{% static 'resources/dashboard_bg.jpg' %}')">
+        <div class="row" style="background-color: transparent;">
             {% include 'index/controls/story_preview_widget.html' %}
         </div>
     {% endif %}

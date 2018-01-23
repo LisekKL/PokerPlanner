@@ -1,8 +1,8 @@
 {% load staticfiles %}
 
 <div class="col-md-8 box box-default"
-     style="padding: 20px; background-image: url('{% static 'resources/dashboard_bg.jpg' %}')">
-    <div class="box-header ui-sortable-handle" style="color: #b8c7ce" style="color: #b8c7ce">
+     style="padding: 20px; background-color: #2f4050;">
+    <div class="box-header ui-sortable-handle" style="color: lightgoldenrodyellow">
         <i class="ion ion-clipboard"></i>
 
         <h3 class="box-title">Story overview</h3>
@@ -19,16 +19,18 @@
                     <!-- Emphasis label -->
                     {#                                <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>#}
                     <!-- General tools such as edit or delete-->
-                    <div class="tools">
-                        <a href="{% url 'Home:stories_overview' %}"><i class="fa fa-edit"></i></a>
-                    </div>
+                    {% if user.is_superuser %}
+                        <div class="tools">
+                            <a href="{% url 'Home:stories_overview' %}"><i class="fa fa-edit"></i></a>
+                        </div>
+                    {% endif %}
                 </li>
             {% endfor %}
         </ul>
     </div>
     <!-- /.box-body -->
     <div class="box-footer clearfix no-border" style="background: transparent">
-        <a href="{% url 'Home:stories_overview' %}" class="btn btn-default pull-right" role="button"><i
-                class="fa fa-plus"></i> View all</a>
+        <a href="{% url 'Home:stories_overview' %}" class="btn btn-primary pull-right" role="button"><i
+                class="fa fa-list" aria-hidden="true"></i> View all</a>
     </div>
 </div>

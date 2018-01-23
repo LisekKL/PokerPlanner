@@ -1,3 +1,5 @@
+import random
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
@@ -130,7 +132,7 @@ class PokerDeck(models.Model):
         self.cards_in_deck.append(card)
 
     def shuffle_deck(self):
-        """shuffle deck - random generator"""
+        random.shuffle(self.cards_in_deck)
 
 
 class PokerCard(models.Model):
