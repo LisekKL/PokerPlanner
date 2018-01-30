@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block title %}
-    <title xmlns="http://www.w3.org/1999/html">Scrum stories</title>
+    <title>Scrum stories</title>
 {% endblock %}
 
 {% block additional_scripts %}
@@ -17,6 +17,7 @@
     {{ block.super }}
     <link href="http://webapplayers.com/inspinia_admin-v2.7.1/css/animate.css" rel="stylesheet">
     <link href="http://webapplayers.com/inspinia_admin-v2.7.1/css/style.css" rel="stylesheet">
+    <link href="{% static 'css/custom/story_overview.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -33,7 +34,7 @@
 
                             {% for story in stories %}
                                 <li>
-                                    <div style="overflow: auto">
+                                    <div class="story_note scrollbar-cyan">
                                         <small>{{ story.author }}</small>
                                         <h4>{{ story.name }}</h4>
                                         <p>{{ story.description }}</p>
@@ -41,7 +42,8 @@
                                             <a href="{% url 'Home:delete_story' story.id %}">
                                                 <i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                             <br>
-                                            <a href="#" style="position: initial; padding-top: 10px; color: darkred"> <i
+                                            <a href="{% url 'Home:start_poker_game' story.id %}"
+                                               style="position: initial; padding-top: 10px; color: darkred"> <i
                                                     class="fa fa-play" aria-hidden="true"> Start poker</i></a>
                                         {% endif %}
                                     </div>

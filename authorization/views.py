@@ -25,7 +25,7 @@ class Register(View):
                                                 password=register_form.cleaned_data['password1'],
                                                 first_name=register_form.cleaned_data['first_name'],
                                                 last_name=register_form.cleaned_data['last_name'])
-                PokerPlayer.objects.create(user=user)
+                PokerPlayer.objects.create(user=user, isAccepted=False)
                 if user.is_authenticated():
                     if user.is_active:
                         login(request, user)
@@ -85,3 +85,4 @@ class Logout(View):
     def get(self, request):
         logout(request)
         return HttpResponseRedirect(reverse("Home:home"))
+

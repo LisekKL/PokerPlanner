@@ -5,13 +5,18 @@
     {% load staticfiles %}
 
     <section class="bg-light" id="team">
-        <div class="container">
+        <div class="container" style="background-color: #c7c0ad">
             {% if active_games.count != 0 %}
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <h2 class="section-heading text-uppercase">Current open games</h2>
                         <h3 class="section-subheading text-muted">An overview of all games that haven't yet reached the
                             ending time.</h3>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom: 15px">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <p class="large text-muted pull-left">Dashboard for managing currently active poker games</p>
                     </div>
                 </div>
                 <div class="row">
@@ -44,11 +49,7 @@
                         </div>
                     {% endfor %}
                 </div>
-                <div class="row">
-                    <div class="col-lg-8 mx-auto text-center">
-                        <p class="large text-muted">Dashboard for managing currently active poker games</p>
-                    </div>
-                </div>
+
             {% else %}
 
                 <h1>No active games currently!</h1>

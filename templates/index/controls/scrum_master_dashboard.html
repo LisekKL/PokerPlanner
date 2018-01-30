@@ -9,13 +9,13 @@
             <p>Scrum Stories</p>
         </div>
         <div class="icon">
-            <i class="ion ion-play"></i>
+            <i class="ion ion-document-text"></i>
         </div>
         <a href="{% url 'Home:add_story' %}" class="small-box-footer">
             Add a new story <i class="fa fa-plus-circle" aria-hidden="true"></i>
         </a>
         <a href="{% url 'Home:stories_overview' %}" class="small-box-footer">
-            Go to overview <i class="fa fa-plus-circle" aria-hidden="true"></i>
+            Go to overview <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
         </a>
     </div>
 </div>
@@ -29,11 +29,15 @@
             <p>Poker Players</p>
         </div>
         <div class="icon">
-            <i class="ion ion-play"></i>
+            <i class="fa fa-users" aria-hidden="true"></i>
         </div>
-        <a href="#" class="small-box-footer">
-            View all players <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        <a href="{% url 'Home:add_poker_players' %}" class="small-box-footer">
+            Add a new player <i class="fa fa-plus-circle" aria-hidden="true"></i>
         </a>
+        <a href="{% url 'Home:players_overview' %}" class="small-box-footer">
+            Go to overview <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+        </a>
+
     </div>
 </div>
 
@@ -46,7 +50,7 @@
             <p>Poker games</p>
         </div>
         <div class="icon">
-            <i class="ion ion-document-text"></i>
+            <i class="fa fa-play-circle"></i>
         </div>
         <a href="{% url 'Home:games_overview' %}" class="small-box-footer">
             Go to open games <i class="fa fa-arrow-circle-right"></i>
